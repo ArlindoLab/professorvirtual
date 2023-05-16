@@ -5,7 +5,7 @@ inputQuestion.addEventListener("keypress", (e) => {
   if (inputQuestion.value && e.key === "Enter") SendQuestion();
 });
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "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 ";
 
 function SendQuestion() {
   var sQuestion = inputQuestion.value;
@@ -18,10 +18,10 @@ function SendQuestion() {
       Authorization: "Bearer " + OPENAI_API_KEY,
     },
     body: JSON.stringify({
-      model: "text-curie-001",
+      model: "text-davinci-003",
       prompt: sQuestion,
-      max_tokens: 1024, // tamanho da resposta
-      temperature: 0.5, // criatividade na resposta
+      max_tokens: 2048, // tamanho da resposta
+      temperature: 0.9, // criatividade na resposta
     }),
   })
     .then((response) => response.json())
@@ -33,7 +33,7 @@ function SendQuestion() {
       } else if (json.choices?.[0].text) {
         var text = json.choices[0].text || "Sem resposta";
 
-        result.value += "Professor: " + text;
+        result.value += "Chat GPT: " + text;
       }
 
       result.scrollTop = result.scrollHeight;
